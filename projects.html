@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Projects - Cybersecurity Portfolio</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    #projects {
+      background-color: #000;
+      color: #fff;
+      padding: 50px 0;
+    }
+
+    .project {
+      margin-bottom: 30px;
+    }
+
+    .project h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .project p {
+      margin-bottom: 10px;
+    }
+
+    .project a {
+      background-color: #00ff00;
+      color: #000;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 3px;
+    }
+
+    .project a:hover {
+      background-color: #00cc00;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="interactive-bg"></canvas>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="active"><a href="projects.html">Projects</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="socials.html">Socials</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project">
+        <h3>Network Security Monitoring System</h3>
+        <p>A web-based application for monitoring network traffic and detecting potential security threats. Utilizes machine learning algorithms for anomaly detection.</p>
+        <a href="#">View Project</a>
+      </div>
+      <div class="project">
+        <h3>Vulnerability Assessment Tool</h3>
+        <p>An automated tool for identifying and assessing vulnerabilities in web applications. Performs security scans and provides detailed reports.</p>
+        <a href="#">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 Cybersecurity Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

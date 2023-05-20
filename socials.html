@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socials</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .social-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+
+    .social-links li {
+      margin-right: 1rem;
+    }
+
+    .social-links a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .social-links img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .social-links span {
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="interactive-bg"></canvas>
+  
+  <div class="container">
+    <h1>Connect with Me</h1>
+    <div class="social-links">
+      <ul>
+        <li>
+          <a href="https://tryhackme.com/p/Rishabh22" target="_blank">
+            <img src="https://d33wubrfki0l68.cloudfront.net/d1d58c6efd1b5f54da66b12068b4d95b1116f769/c1771/_nuxt/images/tryhackme-logo-1600.c84cc8a.jpg" alt="TryHackMe">
+            <span>TryHackMe</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/_rishabh.raii/" target="_blank">
+            <img src="https://images.all-free-download.com/images/graphicwebp/instagram_new_icon_6822180.webp" alt="Instagram">
+            <span>Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://rishabhrai02.medium.com/" target="_blank">
+            <img src="https://firstsiteguide.com/wp-content/uploads/2021/05/Medium-logo-new-e1622403515131.jpeg" alt="Medium">
+            <span>Medium</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/rishabh-rai-858a911b9/" target="_blank">
+            <img src="https://vaibhavgujral.com/wp-content/uploads/2020/12/Linkedin.png" alt="LinkedIn">
+            <span>LinkedIn</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com/rai_rishh" target="_blank">
+            <img src="https://lofrev.net/wp-content/photos/2016/07/twitter_logo.jpg" alt="Twitter">
+            <span>Twitter</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+  <script>
+    // JavaScript code for the interactive background
+    const canvas = document.getElementById("interactive-bg");
+    const context = canvas.getContext("2d");
+    let particles = [];
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+      constructor(x, y, size, color) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.color = color;
+        this.speedX = Math.random() * 5 - 2.5;
+        this.speedY = Math.random() * 5 - 2.5;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.size > 0.1) this.size -= 0.05;
+      }
+
+      draw() {
+        context.fillStyle = this.color;
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        context.closePath();
+        context.fill();
+      }
+    }
+
+    function createParticles(e) {
+      const xPos = e.x;
+      const yPos = e.y;
+      const size = Math.random() * 3 + 1;
+      const color = "#00ff00";
+
+      particles.push(new Particle(xPos, yPos, size, color));
+    }
+
+    function animateParticles() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        if (particles[i].size <= 0.1) {
+          particles.splice(i, 1);
+          i--;
+        }
+      }
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    canvas.addEventListener("mousemove", createParticles);
+    animateParticles();
+  </script>
+</body>
+</html>
