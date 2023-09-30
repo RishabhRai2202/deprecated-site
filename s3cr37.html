@@ -33,7 +33,7 @@
         .photo-description {
             text-align: center;
             font-weight: bold;
-            color: black; /* Set the description text color to black */
+            color: black;
             display: none;
         }
     </style>
@@ -65,26 +65,27 @@
         const photoFrames = document.querySelectorAll('.photo-frame');
         let currentPhotoIndex = 0;
 
-        function showNextPhoto() {
-            if (currentPhotoIndex < photoFrames.length) {
-                const currentFrame = photoFrames[currentPhotoIndex];
-                const nextFrame = photoFrames[currentPhotoIndex + 1];
-                
-                currentFrame.style.display = 'block';
-                nextFrame.style.display = 'block';
+        function showPhoto(index) {
+            // Hide all photos and descriptions
+            photoFrames.forEach((frame) => {
+                frame.style.display = 'none';
+                const description = frame.querySelector('.photo-description');
+                description.style.display = 'none';
+            });
 
-                currentPhotoIndex++;
-            }
+            // Show the specified photo and its description
+            const frame = photoFrames[index];
+            frame.style.display = 'block';
+            const description = frame.querySelector('.photo-description');
+            description.style.display = 'block';
         }
 
-        photoFrames[currentPhotoIndex].style.display = 'block';
+        showPhoto(currentPhotoIndex);
 
         photoFrames.forEach((frame, index) => {
             frame.addEventListener('click', () => {
-                frame.style.display = 'none';
-                const description = frame.querySelector('.photo-description');
-                description.style.display = 'block';
-                showNextPhoto();
+                currentPhotoIndex = (currentPhotoIndex + 1) % photoFrames.length;
+                showPhoto(currentPhotoIndex);
             });
         });
     </script>
