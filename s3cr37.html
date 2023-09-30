@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Page</title>
     <style>
-        .photo-container {
+        body {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            position: relative;
-            width: 300px;
-            margin: 0 auto;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .photo-container {
+            text-align: center;
         }
         
         .photo-frame {
@@ -21,8 +24,7 @@
         }
         
         .photo {
-            width: 100%;
-            height: auto;
+            max-width: 100%;
             max-height: 300px;
             transition: opacity 0.5s;
             cursor: pointer;
@@ -59,23 +61,28 @@
         </div>
     </div>
     <script>
-        const photos = document.querySelectorAll('.photo');
-        const descriptions = document.querySelectorAll('.photo-description');
-        
-        photos.forEach((photo, index) => {
-            photo.addEventListener('click', () => {
-                // Hide the clicked photo
-                photo.style.opacity = 0;
+        const photoFrames = document.querySelectorAll('.photo-frame');
+
+        let currentPhotoIndex = 0;
+
+        function showNextPhoto() {
+            if (currentPhotoIndex < photoFrames.length) {
+                const currentFrame = photoFrames[currentPhotoIndex];
+                const nextFrame = photoFrames[currentPhotoIndex + 1];
                 
-                // Show the description
-                descriptions[index].style.display = 'block';
-                
-                // After a delay, reveal the next photo (if any)
-                setTimeout(() => {
-                    if (index < photos.length - 1) {
-                        photos[index + 1].style.opacity = 1;
-                    }
-                }, 500);
+                currentFrame.style.display = 'none';
+                nextFrame.style.display = 'block';
+
+                currentPhotoIndex++;
+            }
+        }
+
+        photoFrames[currentPhotoIndex].style.display = 'block';
+
+        photoFrames.forEach((frame, index) => {
+            frame.addEventListener('click', () => {
+                frame.style.display = 'none';
+                showNextPhoto();
             });
         });
     </script>
